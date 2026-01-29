@@ -1,0 +1,32 @@
+  services:
+  db:
+    image: postgres:16
+    container_name: auth_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - auth_db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  app:
+    build: .
+    container_name: alx-auth
+    depends_on:
+      - db
+    environment:
+      QUARKUS_HTTP_PORT: "8080"
+      QUARKUS_DATASOURCE_DB_KIND: postgresql
+      QUARKUS_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      QUARKUS_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+
+      MP_JWT_VERIFY_ISSUER: ${JWT_ISSUER}
+      QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: ${HIBERNATE_DDL}
+    ports:
+      - "${APP_PORT}:8080"
+    restart: unless-stopped
+
+volumes:
+  auth_db_data:
