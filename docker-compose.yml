@@ -28,7 +28,7 @@ services:
       MP_JWT_VERIFY_PUBLICKEY_LOCATION: /keys/publicKey-prod.pem
     ports:
       - "8080:8080"
-    volume:
+    volumes:
       - ./keys:/keys:ro
     restart: unless-stopped
 
