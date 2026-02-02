@@ -8,6 +8,7 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - auth_db_data:/var/lib/postgresql/data
+      - ./keys:/keys:ro
     restart: unless-stopped
 
   app:
