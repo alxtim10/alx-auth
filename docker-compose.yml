@@ -8,7 +8,6 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - auth_db_data:/var/lib/postgresql/data
-      - ./keys:/keys:ro
     restart: unless-stopped
 
   app:
@@ -29,6 +28,8 @@ services:
       MP_JWT_VERIFY_PUBLICKEY_LOCATION: /keys/publicKey-prod.pem
     ports:
       - "8080:8080"
+    volume:
+      - ./keys:/keys:ro
     restart: unless-stopped
 
 volumes:
