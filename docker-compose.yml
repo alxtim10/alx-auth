@@ -24,6 +24,8 @@ services:
 
       MP_JWT_VERIFY_ISSUER: default-be
       QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: update
+      SMALLRYE_JWT_SIGN_KEY_LOCATION: privateKey-prod.pem
+      MP_JWT_VERIFY_PUBLICKEY_LOCATION: publicKey-prod.pem
     ports:
       - "8080:8080"
     restart: unless-stopped
