@@ -27,7 +27,7 @@ services:
       SMALLRYE_JWT_SIGN_KEY_LOCATION: /keys/privateKey-prod.pem
       MP_JWT_VERIFY_PUBLICKEY_LOCATION: /keys/publicKey-prod.pem
     ports:
-      - "8080:8080"
+      - "8081:8081"
     volumes:
       - ./keys:/keys:ro
     restart: unless-stopped
